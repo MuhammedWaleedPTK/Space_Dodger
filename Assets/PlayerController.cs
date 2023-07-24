@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        isMovable = true;
+
         screenHeight = Camera.main.orthographicSize;
 
         
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleInput();
         }
+        Debug.Log(isMovable);
         
     }
 
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, -screenHeight+1, screenHeight-1);
 
         transform.position = newPosition;
+        Debug.Log("hi");
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
