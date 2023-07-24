@@ -71,7 +71,7 @@ public class AsteroidSpawner : MonoBehaviour
         if(obj != null)
         {
             obj.SetActive(true);
-            Debug.Log(obj.transform.position.y+"  :  "+count);
+           
             count++;
             obj.transform.position=spawnPosition;
         }

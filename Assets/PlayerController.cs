@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f; 
     private float screenHeight;
     private bool isMobilePlatform;
+    public static bool isMovable = true;
+
+    public static Action PlayerDeadAction;
 
     void Start()
     {
@@ -20,7 +24,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
+        if(isMovable)
+        {
+            HandleInput();
+        }
+        
     }
 
     void HandleInput()
@@ -33,6 +41,14 @@ public class PlayerController : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, -screenHeight+1, screenHeight-1);
 
         transform.position = newPosition;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Asteroid"))
+        {
+            isMovable= false;
+            PlayerDeadAction();
+        }
     }
 
 
